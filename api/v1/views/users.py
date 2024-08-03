@@ -9,8 +9,7 @@ from api.v1.views import app_views
 USERS_SEGMENT = 'users'
 
 
-@app_views.route('/users', methods=['GET'],
-                 strict_slashes=False)
+@app_views.route('/users', methods=['GET'])
 def get_users():
     """Retrieves the list of all User objects"""
     users = [user.to_dict() for user in storage.all(User).values()]
@@ -18,7 +17,7 @@ def get_users():
 
 
 @app_views.route(f'/{USERS_SEGMENT}/<user_id>',
-                 methods=['GET'], strict_slashes=False)
+                 methods=['GET'])
 def get_user(user_id):
     """Retrieves a User object by id"""
     user = storage.get(User, user_id)
@@ -28,7 +27,7 @@ def get_user(user_id):
 
 
 @app_views.route(f'/{USERS_SEGMENT}/<user_id>',
-                 methods=['DELETE'], strict_slashes=False)
+                 methods=['DELETE'])
 def delete_user(user_id):
     """Deletes a User object by id"""
     user = storage.get(User, user_id)
@@ -56,7 +55,7 @@ def create_user():
 
 
 @app_views.route(f'/{USERS_SEGMENT}/<user_id>',
-                 methods=['PUT'], strict_slashes=False)
+                 methods=['PUT'])
 def update_user(user_id):
     """Updates a User object"""
     user = storage.get(User, user_id)

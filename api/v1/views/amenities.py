@@ -10,7 +10,7 @@ AMENITIES_SEGMENT = 'amenities'
 
 
 @app_views.route(f'/{AMENITIES_SEGMENT}',
-                 methods=['GET'], strict_slashes=False)
+                 methods=['GET'])
 def get_amenities():
     """Retrieves the list of all Amenity objects"""
     amenities = [amenity.to_dict()
@@ -19,7 +19,7 @@ def get_amenities():
 
 
 @app_views.route(f'/{AMENITIES_SEGMENT}/<amenity_id>',
-                 methods=['GET'], strict_slashes=False)
+                 methods=['GET'])
 def get_amenity(amenity_id):
     """Retrieves an Amenity object by id"""
     amenity = storage.get(Amenity, amenity_id)
@@ -29,7 +29,7 @@ def get_amenity(amenity_id):
 
 
 @app_views.route(f'/{AMENITIES_SEGMENT}/<amenity_id>',
-                 methods=['DELETE'], strict_slashes=False)
+                 methods=['DELETE'])
 def delete_amenity(amenity_id):
     """Deletes an Amenity object by id"""
     amenity = storage.get(Amenity, amenity_id)
@@ -41,7 +41,7 @@ def delete_amenity(amenity_id):
 
 
 @app_views.route(f'/{AMENITIES_SEGMENT}',
-                 methods=['POST'], strict_slashes=False)
+                 methods=['POST'])
 def create_amenity():
     """Creates a new Amenity"""
     data = request.get_json()
@@ -55,7 +55,7 @@ def create_amenity():
 
 
 @app_views.route(f'/{AMENITIES_SEGMENT}/<amenity_id>',
-                 methods=['PUT'], strict_slashes=False)
+                 methods=['PUT'])
 def update_amenity(amenity_id):
     """Updates an Amenity object"""
     amenity = storage.get(Amenity, amenity_id)

@@ -14,7 +14,7 @@ CITIES_SEGMENT = 'cities'
 
 
 @app_views.route(f'/{ STATES_SEGMENT }/<state_id>/{ CITIES_SEGMENT }',
-                 methods=['GET'], strict_slashes=False)
+                 methods=['GET'])
 def get_cities(state_id):
     """ Gets the list of all cities of a state id """
     state = storage.get(State, state_id)
@@ -25,7 +25,7 @@ def get_cities(state_id):
 
 
 @app_views.route(f'/{ CITIES_SEGMENT }/<city_id>',
-                 methods=['GET'], strict_slashes=False)
+                 methods=['GET'])
 def get_city(city_id):
     """ Gets a city by id """
     city = storage.get(City, city_id)
@@ -35,7 +35,7 @@ def get_city(city_id):
 
 
 @app_views.route(f'/{ CITIES_SEGMENT }/<city_id>',
-                 methods=['DELETE'], strict_slashes=False)
+                 methods=['DELETE'])
 def delete_city(city_id):
     """ Deletes a city by id """
     city = storage.get(City, city_id)
@@ -47,7 +47,7 @@ def delete_city(city_id):
 
 
 @app_views.route(f'/{ STATES_SEGMENT }/<state_id>/{ CITIES_SEGMENT }',
-                 methods=['POST'], strict_slashes=False)
+                 methods=['POST'])
 def create_city(state_id):
     """ Creates a city """
     state = storage.get(State, state_id)
@@ -65,7 +65,7 @@ def create_city(state_id):
 
 
 @app_views.route(f'/{ CITIES_SEGMENT }/<city_id>',
-                 methods=['PUT'], strict_slashes=False)
+                 methods=['PUT'])
 def update_city(city_id):
     """ Updates a city """
     city = storage.get(City, city_id)
