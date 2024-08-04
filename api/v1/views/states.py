@@ -68,6 +68,6 @@ def update_state(state_id):
     forbidden_keys = ['id', 'created_at', 'updated_at']
     for key, value in data.items():
         if key not in forbidden_keys:
-            state[key] = value
+            setattr(state, key, value)
     state.save()
     return jsonify(state.to_dict()), 200
