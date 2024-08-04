@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-""" AirBnB_clone's Flask api app """
+
+"""
+AirBnB_clone's Flask api app
+
+"""
 
 from os import getenv
 from flask import Flask
@@ -18,13 +22,13 @@ CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
 
 @app.teardown_appcontext
-def close_storage(exception):
+def close_storage():
     """Close the storage engine"""
     storage.close()
 
 
 @app.errorhandler(404)
-def not_found(error):
+def not_found():
     """Return a JSON-formatted 404 status code response"""
     return {"error": "Not found"}, 404
 
