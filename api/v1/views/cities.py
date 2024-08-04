@@ -9,11 +9,8 @@ from flask import jsonify, abort, request
 
 from api.v1.views import app_views
 
-from api.v1.views.states import STATES_SEGMENT
-CITIES_SEGMENT = 'cities'
 
-
-@app_views.route(f'/{ STATES_SEGMENT }/<state_id>/{ CITIES_SEGMENT }',
+@app_views.route('/states/<state_id>/cities',
                  methods=['GET'])
 def get_cities(state_id):
     """ Gets the list of all cities of a state id """
@@ -24,7 +21,7 @@ def get_cities(state_id):
     return jsonify(cities)
 
 
-@app_views.route(f'/{ CITIES_SEGMENT }/<city_id>',
+@app_views.route('/cities/<city_id>',
                  methods=['GET'])
 def get_city(city_id):
     """ Gets a city by id """
@@ -34,7 +31,7 @@ def get_city(city_id):
     return jsonify(city.to_dict())
 
 
-@app_views.route(f'/{ CITIES_SEGMENT }/<city_id>',
+@app_views.route('/cities/<city_id>',
                  methods=['DELETE'])
 def delete_city(city_id):
     """ Deletes a city by id """
@@ -46,7 +43,7 @@ def delete_city(city_id):
     return jsonify({}), 200
 
 
-@app_views.route(f'/{ STATES_SEGMENT }/<state_id>/{ CITIES_SEGMENT }',
+@app_views.route('/states/<state_id>/cities',
                  methods=['POST'])
 def create_city(state_id):
     """ Creates a city """
@@ -64,7 +61,7 @@ def create_city(state_id):
     return jsonify(city.to_dict()), 201
 
 
-@app_views.route(f'/{ CITIES_SEGMENT }/<city_id>',
+@app_views.route('/cities/<city_id>',
                  methods=['PUT'])
 def update_city(city_id):
     """ Updates a city """

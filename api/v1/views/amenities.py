@@ -6,11 +6,8 @@ from models.amenity import Amenity
 from flask import jsonify, abort, request
 from api.v1.views import app_views
 
-AMENITIES_SEGMENT = 'amenities'
 
-
-@app_views.route(f'/{AMENITIES_SEGMENT}',
-                 methods=['GET'])
+@app_views.route('/amenities', methods=['GET'])
 def get_amenities():
     """Retrieves the list of all Amenity objects"""
     amenities = [amenity.to_dict()
@@ -18,7 +15,7 @@ def get_amenities():
     return jsonify(amenities)
 
 
-@app_views.route(f'/{AMENITIES_SEGMENT}/<amenity_id>',
+@app_views.route('/amenities/<amenity_id>',
                  methods=['GET'])
 def get_amenity(amenity_id):
     """Retrieves an Amenity object by id"""
@@ -28,7 +25,7 @@ def get_amenity(amenity_id):
     return jsonify(amenity.to_dict())
 
 
-@app_views.route(f'/{AMENITIES_SEGMENT}/<amenity_id>',
+@app_views.route('/amenities/<amenity_id>',
                  methods=['DELETE'])
 def delete_amenity(amenity_id):
     """Deletes an Amenity object by id"""
@@ -40,7 +37,7 @@ def delete_amenity(amenity_id):
     return jsonify({}), 200
 
 
-@app_views.route(f'/{AMENITIES_SEGMENT}',
+@app_views.route('/amenities',
                  methods=['POST'])
 def create_amenity():
     """Creates a new Amenity"""
@@ -54,7 +51,7 @@ def create_amenity():
     return jsonify(amenity.to_dict()), 201
 
 
-@app_views.route(f'/{AMENITIES_SEGMENT}/<amenity_id>',
+@app_views.route('/amenities/<amenity_id>',
                  methods=['PUT'])
 def update_amenity(amenity_id):
     """Updates an Amenity object"""

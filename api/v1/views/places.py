@@ -8,8 +8,6 @@ from models.user import User
 from flask import jsonify, abort, request
 from api.v1.views import app_views
 
-PLACES_SEGMENT = 'places'
-
 
 @app_views.route('/cities/<city_id>/places',
                  methods=['GET'])
@@ -22,7 +20,7 @@ def get_places(city_id):
     return jsonify(places)
 
 
-@app_views.route(f'/{PLACES_SEGMENT}/<place_id>',
+@app_views.route('/places/<place_id>',
                  methods=['GET'])
 def get_place(place_id):
     """Retrieves a Place object by id"""
@@ -32,7 +30,7 @@ def get_place(place_id):
     return jsonify(place.to_dict())
 
 
-@app_views.route(f'/{PLACES_SEGMENT}/<place_id>',
+@app_views.route('/places/<place_id>',
                  methods=['DELETE'])
 def delete_place(place_id):
     """Deletes a Place object by id"""
@@ -68,7 +66,7 @@ def create_place(city_id):
     return jsonify(place.to_dict()), 201
 
 
-@app_views.route(f'/{PLACES_SEGMENT}/<place_id>',
+@app_views.route('/places/<place_id>',
                  methods=['PUT'])
 def update_place(place_id):
     """Updates a Place object"""
