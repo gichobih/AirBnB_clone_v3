@@ -23,13 +23,13 @@ CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
 
 @app.teardown_appcontext
-def close_storage():
+def close_storage(exception):
     """Close the storage engine"""
     storage.close()
 
 
 @app.errorhandler(404)
-def not_found():
+def not_found(error):
     """Return a JSON-formatted 404 status code response"""
     return {"error": "Not found"}, 404
 
