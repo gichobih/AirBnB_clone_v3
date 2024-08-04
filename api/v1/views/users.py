@@ -6,8 +6,6 @@ from models.user import User
 from flask import jsonify, abort, request
 from api.v1.views import app_views
 
-USERS_SEGMENT = 'users'
-
 
 @app_views.route('/users', methods=['GET'])
 def get_users():
@@ -16,7 +14,7 @@ def get_users():
     return jsonify(users)
 
 
-@app_views.route(f'/{USERS_SEGMENT}/<user_id>',
+@app_views.route('/users/<user_id>',
                  methods=['GET'])
 def get_user(user_id):
     """Retrieves a User object by id"""
@@ -26,7 +24,7 @@ def get_user(user_id):
     return jsonify(user.to_dict())
 
 
-@app_views.route(f'/{USERS_SEGMENT}/<user_id>',
+@app_views.route('/users/<user_id>',
                  methods=['DELETE'])
 def delete_user(user_id):
     """Deletes a User object by id"""
@@ -38,23 +36,23 @@ def delete_user(user_id):
     return jsonify({}), 200
 
 
-@app_views.route('/users', methods=['POST'],
-                 strict_slashes=False)
+@app_views.route('/users', methods=['POST'])
 def create_user():
     """Creates a new User"""
     data = request.get_json()
     if data is None:
-        return jsonify({'error': 'Not a JSON'}), 400
+        abort(400, 'Not a JSON')
     if 'email' not in data:
-        return jsonify({'error': 'Missing email'}), 400
+        abort(400, 'Missing email')
     if 'password' not in data:
-        return jsonify({'error': 'Missing password'}), 400
+        abort(400, 'Missing password')
+
     user = User(**data)
     user.save()
     return jsonify(user.to_dict()), 201
 
 
-@app_views.route(f'/{USERS_SEGMENT}/<user_id>',
+@app_views.route('/users/<user_id>',
                  methods=['PUT'])
 def update_user(user_id):
     """Updates a User object"""
@@ -63,7 +61,7 @@ def update_user(user_id):
         abort(404)
     data = request.get_json()
     if data is None:
-        return jsonify({'error': 'Not a JSON'}), 400
+        abort(400, 'Not a JSON')
 
     forbidden_keys = ['id', 'email', 'created_at', 'updated_at']
     for key, value in data.items():
