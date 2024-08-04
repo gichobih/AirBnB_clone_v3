@@ -3,11 +3,12 @@
 
 from models import storage
 from models.user import User
+
 from flask import jsonify, abort, request
 from api.v1.views import app_views
 
 
-@app_views.route('/users', methods=['GET'])
+@app_views.route('/users', methods=['GET'], strict_slashes=False)
 def get_users():
     """Retrieves the list of all User objects"""
     users = [user.to_dict() for user in storage.all(User).values()]
@@ -25,7 +26,7 @@ def get_user(user_id):
 
 
 @app_views.route('/users/<user_id>',
-                 methods=['DELETE'])
+                 methods=['DELETE'], strict_slashes=False)
 def delete_user(user_id):
     """Deletes a User object by id"""
     user = storage.get(User, user_id)
@@ -36,7 +37,7 @@ def delete_user(user_id):
     return jsonify({}), 200
 
 
-@app_views.route('/users', methods=['POST'])
+@app_views.route('/users', methods=['POST'], strict_slashes=False)
 def create_user():
     """Creates a new User"""
     data = request.get_json()
@@ -53,7 +54,7 @@ def create_user():
 
 
 @app_views.route('/users/<user_id>',
-                 methods=['PUT'])
+                 methods=['PUT'], strict_slashes=False)
 def update_user(user_id):
     """Updates a User object"""
     user = storage.get(User, user_id)
