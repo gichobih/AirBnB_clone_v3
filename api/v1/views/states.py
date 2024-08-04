@@ -45,11 +45,11 @@ def delete_state(state_id):
 def create_state():
     """ Creates a state """
     data = request.get_json()
-    if data is None:
+    if not data:
         abort(400, 'Not a JSON')
     if 'name' not in data:
         abort(400, 'Missing name')
-    state = State(name=data['name'])
+    state = State(**data)
     state.save()
     return jsonify(state.to_dict()), 201
 
@@ -62,12 +62,12 @@ def update_state(state_id):
     if state is None:
         abort(404)
     data = request.get_json()
-    if data is None:
+    if not data:
         abort(400, 'Not a JSON')
 
     forbidden_keys = ['id', 'created_at', 'updated_at']
     for key, value in data.items():
         if key not in forbidden_keys:
-            setattr(state, key, value)
+            state[key] = value
     state.save()
     return jsonify(state.to_dict()), 200

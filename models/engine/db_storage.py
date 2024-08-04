@@ -12,7 +12,6 @@ from models.review import Review
 from models.state import State
 from models.user import User
 from os import getenv
-import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
@@ -80,7 +79,7 @@ class DBStorage:
         Returns the object based on the class name and its ID, or
         None if not found
         """
-        if cls not in classes.values():
+        if cls not in classes and cls not in classes.values():
             return None
 
         all_cls = models.storage.all(cls)
