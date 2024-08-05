@@ -42,7 +42,7 @@ def delete_state(state_id):
                  methods=['POST'])
 def create_state():
     """ Creates a state """
-    data = request.get_json()
+    data = request.get_json(silent=True)
     if not data:
         abort(400, 'Not a JSON')
     if 'name' not in data:
@@ -59,7 +59,7 @@ def update_state(state_id):
     state = storage.get(State, state_id)
     if not state:
         abort(404)
-    data = request.get_json()
+    data = request.get_json(silent=True)
     if not data:
         abort(400, 'Not a JSON')
 
