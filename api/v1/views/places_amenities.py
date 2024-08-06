@@ -16,7 +16,7 @@ from api.v1.views import app_views
 
 
 @app_views.route('/places/<place_id>/amenities', methods=['GET'])
-def get_amenities(place_id):
+def get_places_amenities(place_id):
     """Return all amenities for a given place"""
     place = storage.get(Place, place_id)
     if place is None:
@@ -26,7 +26,7 @@ def get_amenities(place_id):
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
                  methods=['DELETE'])
-def delete_amenity(place_id, amenity_id):
+def delete_place_amenity(place_id, amenity_id):
     """Delete an amenity by its ID"""
     place = storage.get(Place, place_id)
     if not place:
